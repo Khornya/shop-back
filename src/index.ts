@@ -1,13 +1,17 @@
-import express, { Express, Request, Response } from 'express'
-import { mysqlDataSource } from './src/orm/data-source'
-import { Product } from './src/orm/entity/product.entity'
-import { SeedProducts1683884432310 } from './src/orm/migrations/1683884432310-SeedProducts'
+import express, { Express } from 'express'
+import { mysqlDataSource } from './orm/data-source'
+import { SeedProducts1683884432310 } from './orm/migrations/1683884432310-SeedProducts'
+import productsRouter from './routes/products'
 
 const port = process.env.EXPRESS_PORT
 
 // create and setup express app
 const app: Express = express()
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
+// register router
+app.use('/products', productsRouter)
 
 // establish database connection
 mysqlDataSource
@@ -19,7 +23,6 @@ mysqlDataSource
   .catch((err) => {
     console.error('Error during Data Source initialization:', err)
   })
-
 
 // start express server
 app.listen(port, () => {

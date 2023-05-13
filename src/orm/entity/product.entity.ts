@@ -1,5 +1,8 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
 
+export const inventoryStatuses = ['INSTOCK', 'LOWSTOCK', 'OUTOFSTOCK'] as const
+export type InventoryStatus = (typeof inventoryStatuses)[number]
+
 @Entity()
 export class Product {
   @PrimaryGeneratedColumn()
@@ -14,8 +17,8 @@ export class Product {
   @Column()
   description!: string
 
-  @Column()
-  image!: string
+  @Column({ nullable: true })
+  image?: string
 
   @Column()
   price!: number
@@ -27,8 +30,8 @@ export class Product {
   quantity!: number
 
   @Column()
-  inventoryStatus!: string
+  inventoryStatus!: InventoryStatus
 
-  @Column()
-  rating!: number
+  @Column({ nullable: true })
+  rating?: number
 }
