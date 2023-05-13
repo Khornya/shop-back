@@ -1,0 +1,841 @@
+{
+	"info": {
+		"_postman_id": "39311595-a619-4c2d-8bfb-1b6766d70259",
+		"name": "Alten Shop",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Get product",
+					"item": [
+						{
+							"name": "Get product",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", () => {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response body is a JSON object\", () => {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData).to.be.an(\"object\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Object keys are correct\", () => {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(Object.keys(jsonData)).to.include('id','code','description')\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/products/1011",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products",
+										"1011"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get unexisting product",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/products/0",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products",
+										"0"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get product with wrong id type",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/products/somestringid",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products",
+										"somestringid"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Create product",
+					"item": [
+						{
+							"name": "Create product",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "code",
+											"value": "some code",
+											"type": "default"
+										},
+										{
+											"key": "name",
+											"value": "some name",
+											"type": "default"
+										},
+										{
+											"key": "description",
+											"value": "some description",
+											"type": "default"
+										},
+										{
+											"key": "price",
+											"value": "30",
+											"type": "default"
+										},
+										{
+											"key": "category",
+											"value": "misc",
+											"type": "default"
+										},
+										{
+											"key": "quantity",
+											"value": "12",
+											"type": "default"
+										},
+										{
+											"key": "inventoryStatus",
+											"value": "INSTOCK",
+											"type": "default"
+										},
+										{
+											"key": "rating",
+											"value": "2",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/products",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create product with id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "code",
+											"value": "some code",
+											"type": "default"
+										},
+										{
+											"key": "name",
+											"value": "some name",
+											"type": "default"
+										},
+										{
+											"key": "description",
+											"value": "some description",
+											"type": "default"
+										},
+										{
+											"key": "price",
+											"value": "30",
+											"type": "default"
+										},
+										{
+											"key": "category",
+											"value": "misc",
+											"type": "default"
+										},
+										{
+											"key": "quantity",
+											"value": "12",
+											"type": "default"
+										},
+										{
+											"key": "inventoryStatus",
+											"value": "INSTOCK",
+											"type": "default"
+										},
+										{
+											"key": "rating",
+											"value": "2",
+											"type": "default"
+										},
+										{
+											"key": "id",
+											"value": "2222",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/products",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create product with existing id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "code",
+											"value": "some code",
+											"type": "default"
+										},
+										{
+											"key": "name",
+											"value": "some name",
+											"type": "default"
+										},
+										{
+											"key": "description",
+											"value": "some description",
+											"type": "default"
+										},
+										{
+											"key": "price",
+											"value": "30",
+											"type": "default"
+										},
+										{
+											"key": "category",
+											"value": "misc",
+											"type": "default"
+										},
+										{
+											"key": "quantity",
+											"value": "12",
+											"type": "default"
+										},
+										{
+											"key": "inventoryStatus",
+											"value": "INSTOCK",
+											"type": "default"
+										},
+										{
+											"key": "rating",
+											"value": "2",
+											"type": "default"
+										},
+										{
+											"key": "id",
+											"value": "1011",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/products",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create product with wrong image extension",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "code",
+											"value": "some code",
+											"type": "default"
+										},
+										{
+											"key": "name",
+											"value": "some name",
+											"type": "default"
+										},
+										{
+											"key": "description",
+											"value": "some description",
+											"type": "default"
+										},
+										{
+											"key": "price",
+											"value": "30",
+											"type": "default"
+										},
+										{
+											"key": "category",
+											"value": "misc",
+											"type": "default"
+										},
+										{
+											"key": "quantity",
+											"value": "12",
+											"type": "default"
+										},
+										{
+											"key": "inventoryStatus",
+											"value": "INSTOCK",
+											"type": "default"
+										},
+										{
+											"key": "rating",
+											"value": "2",
+											"type": "default"
+										},
+										{
+											"key": "image",
+											"value": "myimage.pdf",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/products",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Update product",
+					"item": [
+						{
+							"name": "Update product",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "code",
+											"value": "some code",
+											"type": "default",
+											"disabled": true
+										},
+										{
+											"key": "name",
+											"value": "some name",
+											"type": "default",
+											"disabled": true
+										},
+										{
+											"key": "description",
+											"value": "some description",
+											"type": "default",
+											"disabled": true
+										},
+										{
+											"key": "price",
+											"value": "45",
+											"type": "default"
+										},
+										{
+											"key": "category",
+											"value": "misc",
+											"type": "default",
+											"disabled": true
+										},
+										{
+											"key": "quantity",
+											"value": "12",
+											"type": "default",
+											"disabled": true
+										},
+										{
+											"key": "inventoryStatus",
+											"value": "INSTOCK",
+											"type": "default",
+											"disabled": true
+										},
+										{
+											"key": "rating",
+											"value": "2",
+											"type": "default",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/products/1011",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products",
+										"1011"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update product with wrong id type",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "code",
+											"value": "some code",
+											"type": "default",
+											"disabled": true
+										},
+										{
+											"key": "name",
+											"value": "some name",
+											"type": "default",
+											"disabled": true
+										},
+										{
+											"key": "description",
+											"value": "some description",
+											"type": "default",
+											"disabled": true
+										},
+										{
+											"key": "price",
+											"value": "45",
+											"type": "default"
+										},
+										{
+											"key": "category",
+											"value": "misc",
+											"type": "default",
+											"disabled": true
+										},
+										{
+											"key": "quantity",
+											"value": "12",
+											"type": "default",
+											"disabled": true
+										},
+										{
+											"key": "inventoryStatus",
+											"value": "INSTOCK",
+											"type": "default",
+											"disabled": true
+										},
+										{
+											"key": "rating",
+											"value": "2",
+											"type": "default",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/products/somestringid",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products",
+										"somestringid"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update product id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "code",
+											"value": "some code",
+											"type": "default",
+											"disabled": true
+										},
+										{
+											"key": "name",
+											"value": "some name",
+											"type": "default",
+											"disabled": true
+										},
+										{
+											"key": "description",
+											"value": "some description",
+											"type": "default",
+											"disabled": true
+										},
+										{
+											"key": "price",
+											"value": "45",
+											"type": "default"
+										},
+										{
+											"key": "category",
+											"value": "misc",
+											"type": "default",
+											"disabled": true
+										},
+										{
+											"key": "quantity",
+											"value": "12",
+											"type": "default",
+											"disabled": true
+										},
+										{
+											"key": "inventoryStatus",
+											"value": "INSTOCK",
+											"type": "default",
+											"disabled": true
+										},
+										{
+											"key": "rating",
+											"value": "2",
+											"type": "default",
+											"disabled": true
+										},
+										{
+											"key": "id",
+											"value": "2224",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseUrl}}/products/1011",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products",
+										"1011"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Delete product",
+					"item": [
+						{
+							"name": "Delete product",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/products/2222",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products",
+										"2222"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete product with wrong id type",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/products/some string id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products",
+										"some string id"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete unexisting product",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/products/0",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products",
+										"0"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "List products",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body is a JSON array\", () => {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.be.an(\"array\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Object keys are correct\", () => {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    jsonData.forEach(item => {\r",
+									"       pm.expect(Object.keys(item)).to.include('id','code','description')\r",
+									"    });\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/products",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
